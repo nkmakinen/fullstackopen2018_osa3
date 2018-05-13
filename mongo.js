@@ -9,7 +9,7 @@ const Person = mongoose.model('Person', {
     number: String,
 })
 
-var args = process.argv.splice(process.execArgv.length + 2);
+var args = process.argv.splice(process.execArgv.length + 2)
 if (args.length === 0) {
     Person
         .find({})

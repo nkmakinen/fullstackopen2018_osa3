@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint ."
   },
   "author": "Niko Mäkinen",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "morgan": "^1.9.0"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
     "nodemon": "^1.17.4"
   }
 }

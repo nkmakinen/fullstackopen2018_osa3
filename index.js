@@ -23,17 +23,17 @@ app.get('/', (req, res) => {
 
 app.get('/info', (req, res) => {
     Person
-    .find({}, {__v: 0})
-    .then(persons => {
-        let content = '<p>puhelinluettelossa on ' + persons.length + ' henkilön tiedot</p>' + 
-                  '<p>' + new Date() + '</p>'
-        res.send(content)
-    })
+        .find({}, { __v: 0 })
+        .then(persons => {
+            let content = '<p>puhelinluettelossa on ' + persons.length + ' henkilön tiedot</p>' +
+                    '<p>' + new Date() + '</p>'
+            res.send(content)
+        })
 })
 
 app.get('/api/persons', (req, res) => {
     Person
-        .find({}, {__v: 0})
+        .find({}, { __v: 0 })
         .then(persons => {
             res.json(persons.map(Person.format))
         })
@@ -80,13 +80,13 @@ app.post('/api/persons', (req, res) => {
                 if (error) {
                     return res.status(400).json({ error: errorText })
                 }
-            
+
                 const person = new Person({
                     id: generateId(),
                     name: body.name,
                     number: body.number
                 })
-            
+
                 person
                     .save()
                     .then(savedPerson => {
@@ -102,21 +102,21 @@ app.post('/api/persons', (req, res) => {
 app.delete('/api/persons/:id', (req, res) => {
     Person
         .findByIdAndRemove(req.params.id)
-        .then(result => {
+        .then(() => {
             res.status(204).end()
         })
-        .catch(error => {
+        .catch(() => {
             res.status(400).send({ error: 'malformatted id' })
         })
 })
 
 app.put('/api/persons/:id', (req, res) => {
     Person
-        .findOneAndUpdate({ name: req.body.name }, { number: req.body.number }, { new: true})
-        .then(updatedPerson => {
+        .findOneAndUpdate({ name: req.body.name }, { number: req.body.number }, { new: true })
+        .then(() => {
             res.status(204).end()
         })
-        .catch(error => {
+        .catch(() => {
             res.status(400).send({ error: 'malformatted id' })
         })
 
